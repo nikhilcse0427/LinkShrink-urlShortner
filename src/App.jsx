@@ -1,13 +1,47 @@
-
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AppLayout from './layout/app-layout'
 import './App.css'
+import LandingPage from './pages/landing-page'
+import Dashboard from './pages/dashboard'
+import Auth from './pages/auth'
+import Link from './pages/link'
+import RedirectLink from './pages/redirect-link'
 
 function App() {
+  const router = createBrowserRouter([{
+    element:<AppLayout />,
+    children:[
+      {
+      path:'/',
+      element:<LandingPage />
+      },
+      {
+        path:'/dashboard',
+        element:<Dashboard />
+      },
+      {
+        path:'/auth',
+        element:<Auth />
+      },
+      {
+        path:'/link',
+        element:<Link />
+      },
+      {
+        path:'/link/:id',
+        element:<RedirectLink />
+      },
+      {
+        path:'/:id',
+        element:<LandingPage />
+      },
+
+  ]
+  }])
 
   return (
     <>
-    <center>
-      <p className='text-3xl text-red-700 font-bold'>Welcome to LinkShrink - <span className='text-blue-600'>urlShortner</span></p>
-    </center>
+      <RouterProvider router={router} />
     </>
   )
 }
